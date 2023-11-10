@@ -23,12 +23,18 @@ namespace Poll2
         /// </summary>
         private int total_selected = 0;
 
-        public Poll(List<(string, int)> answers, string question)
+        /// <summary>
+        /// Poll id, how to retrive your poll
+        /// </summary>
+        public int poll_id;
+
+        public Poll(List<(string, int)> answers, string question, int poll_id)
         {
+            this.poll_id                = poll_id;
             this.answers                = answers;
             this.Orientation            = Orientation.Vertical;
             this.HorizontalAlignment    = HorizontalAlignment.Left;
-            this.Margin                 = new Thickness(6);
+            this.Margin                 = new Thickness(10);
 
             // Add title / question
             var textBlock                   = new TextBlock();
@@ -87,6 +93,24 @@ namespace Poll2
             {
                 this.Children.Add((new SingleRowPoll(answer.Item1, answer.Item2)).setClickAction(ClickCallback));
             }
+
+            
+            // View result button
+            Border border = new Border();
+            border.Padding = new Thickness(17, 8, 17, 8);
+            border.Margin = new Thickness(0, 10, 0, 0);
+            border.CornerRadius = new CornerRadius(15);
+            Color color = (Color)ColorConverter.ConvertFromString("#457da1");
+            border.Background = new SolidColorBrush(color);
+            border.HorizontalAlignment = HorizontalAlignment.Center;
+
+            TextBlock textBlockResult   = new TextBlock();
+            textBlockResult.Text        = "View result";
+            textBlockResult.FontWeight  = FontWeights.Thin;
+            textBlockResult.Foreground  = new SolidColorBrush(Colors.White);
+
+            border.Child = textBlockResult;
+            this.Children.Add(border);
         }
 
         /// <summary>

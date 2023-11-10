@@ -22,7 +22,7 @@ namespace Demo
         public MainWindow()
         {
             DataContext = this;
-            poll        = new Poll(list, "Do you need somthing to create something else?");
+            poll        = new Poll(list, "Do you need somthing to create something else?", 1);
             InitializeComponent();
 
             poll.selectAnswer(list[1].Item2, 1234, true);

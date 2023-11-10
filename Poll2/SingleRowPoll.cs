@@ -76,7 +76,7 @@ namespace Poll2
             textBlock.TextWrapping              = TextWrapping.Wrap;
             textBlock.Margin                    = new Thickness(0, 3, 0, 6);
             textBlock.MouseLeftButtonUp += Border_MouseLeftButtonUp;
-            textBlock.MaxWidth = 190;
+            textBlock.MaxWidth = 180;
             Grid.SetColumn(textBlock, 1);
             grid.Children.Add(textBlock);
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Effects;
 
 namespace Poll2
 {
@@ -106,10 +107,22 @@ namespace Poll2
 
             TextBlock textBlockResult   = new TextBlock();
             textBlockResult.Text        = "View result";
-            textBlockResult.FontWeight  = FontWeights.Thin;
+            textBlockResult.FontWeight  = FontWeights.DemiBold;
             textBlockResult.Foreground  = new SolidColorBrush(Colors.White);
 
             border.Child = textBlockResult;
+
+            // Shadow effect
+            border.Effect = new DropShadowEffect
+            {
+                ShadowDepth = 0,
+                BlurRadius = 10,
+                Color = (Color)ColorConverter.ConvertFromString("#55434343"),
+                Opacity = 0.1
+            };
+            border.MouseEnter += StaticUtility.Border_MouseEnter;
+            border.MouseLeave += StaticUtility.Border_MouseLeave;
+
             this.Children.Add(border);
         }
 

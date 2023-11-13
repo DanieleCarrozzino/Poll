@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
 using System.Resources;
+using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media.Animation;
+using System.Windows;
 
 namespace Poll2
 {
@@ -125,6 +129,126 @@ namespace Poll2
                 multipleSelectionIcon.Freeze();
             }
             return multipleSelectionIcon;
+        }
+
+        /// <summary>
+        /// multiple selection icon cache
+        /// </summary>
+        private static BitmapImage teamIcon = null;
+
+        /// <summary>
+        /// Get the checked image 
+        /// for the selection mode of a row
+        /// </summary>
+        /// <returns></returns>
+        public static BitmapImage getTeamIcon()
+        {
+            if (teamIcon == null)
+            {
+                // create a new BitmapImage
+                teamIcon = new BitmapImage();
+
+                // set the image source to the path of the image file
+                teamIcon.BeginInit();
+                teamIcon.UriSource = new Uri(
+                    @"pack://application:,,,/Poll2;component/resources/images/team.png",
+                    UriKind.RelativeOrAbsolute);
+                teamIcon.EndInit();
+                teamIcon.Freeze();
+            }
+            return teamIcon;
+        }
+
+        /// <summary>
+        /// multiple selection icon cache
+        /// </summary>
+        private static BitmapImage calendarClock = null;
+
+        /// <summary>
+        /// Get the checked image 
+        /// for the selection mode of a row
+        /// </summary>
+        /// <returns></returns>
+        public static BitmapImage getCalendarClockIcon()
+        {
+            if (calendarClock == null)
+            {
+                // create a new BitmapImage
+                calendarClock = new BitmapImage();
+
+                // set the image source to the path of the image file
+                calendarClock.BeginInit();
+                calendarClock.UriSource = new Uri(
+                    @"pack://application:,,,/Poll2;component/resources/images/calendar_clock.png",
+                    UriKind.RelativeOrAbsolute);
+                calendarClock.EndInit();
+                calendarClock.Freeze();
+            }
+            return calendarClock;
+        }
+
+        /// <summary>
+        /// multiple selection icon cache
+        /// </summary>
+        private static BitmapImage calendarCall = null;
+
+        /// <summary>
+        /// Get the checked image 
+        /// for the selection mode of a row
+        /// </summary>
+        /// <returns></returns>
+        public static BitmapImage getCalendarCallIcon()
+        {
+            if (calendarCall == null)
+            {
+                // create a new BitmapImage
+                calendarCall = new BitmapImage();
+
+                // set the image source to the path of the image file
+                calendarCall.BeginInit();
+                calendarCall.UriSource = new Uri(
+                    @"pack://application:,,,/Poll2;component/resources/images/calendar_call.png",
+                    UriKind.RelativeOrAbsolute);
+                calendarCall.EndInit();
+                calendarCall.Freeze();
+            }
+            return calendarCall;
+        }
+
+
+
+        public static void Border_MouseEnter(object sender, MouseEventArgs e)
+        {
+            ElevationAnimation((Border)sender, true, true);
+        }
+
+        public static void Border_MouseLeave(object sender, MouseEventArgs e)
+        {
+            ElevationAnimation((Border)sender, false, false);
+        }
+
+        private static void ElevationAnimation(Border border, bool up, bool selected)
+        {
+            DoubleAnimation anim = new DoubleAnimation();
+            anim.From = up ? 0 : (selected ? 4 : 3);
+            anim.To = up ? (selected ? 4 : 3) : 0;
+            anim.Duration = TimeSpan.FromSeconds(0.2);
+
+            DoubleAnimation animOpacity = new DoubleAnimation();
+            animOpacity.From = up ? 0.1 : (selected ? 0.4 : 0.4);
+            animOpacity.To = up ? (selected ? 0.4 : 0.4) : 0.1;
+            animOpacity.Duration = TimeSpan.FromSeconds(0.2);
+
+            Storyboard sb = new Storyboard();
+            sb.Children.Add(anim);
+            sb.Children.Add(animOpacity);
+
+            Storyboard.SetTarget(anim, border);
+            Storyboard.SetTargetProperty(anim, new PropertyPath("(Border.Effect).(DropShadowEffect.ShadowDepth)"));
+
+            Storyboard.SetTarget(animOpacity, border);
+            Storyboard.SetTargetProperty(animOpacity, new PropertyPath("(Border.Effect).(DropShadowEffect.Opacity)"));
+            sb.Begin();
         }
     }
 }

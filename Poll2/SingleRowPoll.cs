@@ -72,7 +72,7 @@ namespace Poll2
             textBlock.Text = text;
             textBlock.FontWeight = FontWeights.SemiBold;
             textBlock.VerticalAlignment         = VerticalAlignment.Center;
-            textBlock.HorizontalAlignment       = System.Windows.HorizontalAlignment.Stretch;
+            textBlock.HorizontalAlignment       = HorizontalAlignment.Stretch;
             textBlock.TextWrapping              = TextWrapping.Wrap;
             textBlock.Margin                    = new Thickness(0, 3, 0, 6);
             textBlock.MouseLeftButtonUp += Border_MouseLeftButtonUp;

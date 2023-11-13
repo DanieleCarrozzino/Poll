@@ -37,7 +37,9 @@ namespace Poll2
 
         private double getDeltaFromRadius(double radius)
         {
-            return radius + (DELTA_TO_ADD + (radius / 10));
+            var result = radius + (DELTA_TO_ADD + (radius / 10));
+            result = Math.Round(result, 1);
+            return result;
         }
 
         protected override void OnRender(DrawingContext dc)
@@ -89,12 +91,35 @@ namespace Poll2
                 startAnimation();
         }
 
+        public bool insertOrRemoveNewColor(Color color, int id)
+        {
+            if(colors.Contains((color, id)))
+            {
+                for(int i = 0; i < colors.Count; i++)
+                {
+                    if (colors[i].Item2 == id)
+                    {
+                        colors.RemoveAt(i);
+                        radius.RemoveAt(i);
+                        break;
+                    }
+                }
+
+                this.Width = Math.Min((MAX_RADIUS) + (10 * colors.Count), MAX_CIRCLES);
+                InvalidateVisual();
+                return false;
+            }
+
+            insertNewColor(color, id);
+            return true;
+        }
+
         private async void startAnimation()
         {
             await Task.Run(async () =>
             {
                 animationRunning = true;
-                while (radius.Last().Item1 != MAX_RADIUS)
+                while (radius.Count > 0 && radius.Last().Item1 != MAX_RADIUS)
                 {
                     Task.Delay(16).Wait();
 

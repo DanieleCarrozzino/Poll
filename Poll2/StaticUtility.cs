@@ -151,7 +151,7 @@ namespace Poll2
                 // set the image source to the path of the image file
                 teamIcon.BeginInit();
                 teamIcon.UriSource = new Uri(
-                    @"pack://application:,,,/Poll2;component/resources/images/team.png",
+                    @"pack://application:,,,/Poll2;component/resources/images/checked.png",
                     UriKind.RelativeOrAbsolute);
                 teamIcon.EndInit();
                 teamIcon.Freeze();
@@ -179,7 +179,7 @@ namespace Poll2
                 // set the image source to the path of the image file
                 calendarClock.BeginInit();
                 calendarClock.UriSource = new Uri(
-                    @"pack://application:,,,/Poll2;component/resources/images/calendar_clock.png",
+                    @"pack://application:,,,/Poll2;component/resources/images/checked.png",
                     UriKind.RelativeOrAbsolute);
                 calendarClock.EndInit();
                 calendarClock.Freeze();
@@ -207,7 +207,7 @@ namespace Poll2
                 // set the image source to the path of the image file
                 calendarCall.BeginInit();
                 calendarCall.UriSource = new Uri(
-                    @"pack://application:,,,/Poll2;component/resources/images/calendar_call.png",
+                    @"pack://application:,,,/Poll2;component/resources/images/checked.png",
                     UriKind.RelativeOrAbsolute);
                 calendarCall.EndInit();
                 calendarCall.Freeze();

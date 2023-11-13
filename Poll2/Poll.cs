@@ -17,7 +17,7 @@ namespace Poll2
         /// <summary>
         /// Click action callback
         /// </summary>
-        private Action<string, int, bool> ClickAction;
+        public Action<string, int, bool> ClickAction;
 
         /// <summary>
         /// Total count of selected answers

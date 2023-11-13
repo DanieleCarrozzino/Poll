@@ -22,15 +22,28 @@ namespace Poll2
 
         // Global objects
         private Border remindMeBorder = null;
+        private RoundedListLeft roundedList = null;
         private bool selected = false;
+        public int personal_id = -1;
+
+        /// <summary>
+        /// Click action callback
+        /// </summary>
+        public Action<bool, int> ClickAction;
 
         public CallCalendar()
         {
+            this.personal_id = -1; // test
+            createUI();
+        }
+
+        public CallCalendar(int id)
+        {
+            this.personal_id = id;
             createUI();
         }
 
         // Layout
-
         private void createUI()
         {
             HorizontalAlignment = HorizontalAlignment.Center;
@@ -183,7 +196,7 @@ namespace Poll2
             };
 
             // RoundedList
-            RoundedListLeft roundedList = new RoundedListLeft
+            roundedList = new RoundedListLeft
             {
                 HorizontalAlignment = HorizontalAlignment.Left
             };
@@ -351,6 +364,7 @@ namespace Poll2
             sendParticipationBorder.Child = sendParticipationTextBlock;
             sendParticipationBorder.MouseEnter += StaticUtility.Border_MouseEnter;
             sendParticipationBorder.MouseLeave += StaticUtility.Border_MouseLeave;
+            sendParticipationBorder.MouseLeftButtonUp += SendParticipationBorder_MouseLeftButtonUp;
 
             // Send Participation Border Effect
             sendParticipationBorder.Effect = new DropShadowEffect
@@ -362,8 +376,13 @@ namespace Poll2
             };
         }
 
-        // Event
+        private void SendParticipationBorder_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            bool result = roundedList.insertOrRemoveNewColor(Colors.Blue, personal_id);
+            ClickAction?.Invoke(result, personal_id);
+        }
 
+        // Event
         private void RemindMeTextBlock_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             selected = !selected;

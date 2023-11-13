@@ -19,12 +19,13 @@ using System.ComponentModel;
 
 namespace Poll2
 {
-    public class CallCalendar : Border, INotifyPropertyChanged
+    public class CallCalendar : Border
     {
 
         // Global objects
         private Border remindMeBorder = null;
         private RoundedListLeft roundedList = null;
+        private TextBlock participantsInfoTextBlock = null;
         private bool selected = false;
         public int personal_id = -1;
 
@@ -33,10 +34,6 @@ namespace Poll2
         /// </summary>
         public Action<bool, int> ClickAction;
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        public void OnPropertyChangedName(string name) =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 
         public CallCalendar()
         {
@@ -50,26 +47,12 @@ namespace Poll2
             createUI();
         }
 
-        private string _textPartecipant = "The scheduled conference currently lacks any booked participants at this time.";
-        private string TextPartecipant
+        public void insertOrRemoveNewPartecipant(int id)
         {
-            get
-            {
-                return _textPartecipant;
-            }
-            set
-            {
-                _textPartecipant = value;
-                OnPropertyChangedName("TextPartecipant");
-            }
-        }
-
-        public void insertOrRemoveNewPartecipant(Color color, int id)
-        {
-            bool result = roundedList.insertOrRemoveNewColor(color, personal_id);
+            bool result = roundedList.insertOrRemoveNewColor(StaticUtility.getColorFromId(id), id);
             if(roundedList.getCountOfColors() > 0)
-                TextPartecipant = "There are currently " + roundedList.getCountOfColors() + " participants attending the conference.";
-            else TextPartecipant = "The scheduled conference currently lacks any booked participants at this time.";
+                participantsInfoTextBlock.Text = "There are currently " + roundedList.getCountOfColors() + " participants attending the conference.";
+            else participantsInfoTextBlock.Text = "The scheduled conference has no booked participants at the moment.";
         }
 
         // Layout
@@ -233,13 +216,14 @@ namespace Poll2
             participantsInfoStackPanel.Children.Add(roundedList);
 
             // Participants Information TextBlock
-            TextBlock participantsInfoTextBlock = new TextBlock
+            participantsInfoTextBlock = new TextBlock
             {
                 Margin = new Thickness(5, 0, 0, 0),
-                Text = TextPartecipant,
+                Text = "The scheduled conference has no booked participants at the moment.",
                 TextWrapping = TextWrapping.WrapWithOverflow,
                 MaxWidth = 150,
                 VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Center,
                 FontWeight = FontWeights.Normal,
                 FontSize = 12
             };
@@ -407,7 +391,10 @@ namespace Poll2
 
         private void SendParticipationBorder_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            bool result = roundedList.insertOrRemoveNewColor(Colors.Blue, personal_id);
+            bool result = roundedList.insertOrRemoveNewColor(StaticUtility.getColorFromId(personal_id), personal_id);
+            if (roundedList.getCountOfColors() > 0)
+                participantsInfoTextBlock.Text = "There are currently " + roundedList.getCountOfColors() + " participants attending the conference.";
+            else participantsInfoTextBlock.Text = "The scheduled conference has no booked participants at the moment.";
             ClickAction?.Invoke(result, personal_id);
         }
 

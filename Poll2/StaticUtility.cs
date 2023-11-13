@@ -250,5 +250,27 @@ namespace Poll2
             Storyboard.SetTargetProperty(animOpacity, new PropertyPath("(Border.Effect).(DropShadowEffect.Opacity)"));
             sb.Begin();
         }
+
+
+        public static Color getColorFromId(int id)
+        {
+            int color = Math.Abs(id % 9);
+            ColorDictionary.TryGetValue(color, out string outValue);
+            return (Color)ColorConverter.ConvertFromString(outValue); ;
+        }
+
+        public static Dictionary<int, string> ColorDictionary = new Dictionary<int, string>() {
+
+            {8,  "#FF9900"},
+            {7,  "#D329D3"},
+            {6,  "#1EB1D8"},
+            {5,  "#2A9B2A"},
+            {4,  "#E01E1E"},
+            {3,  "#7A4610"},
+            {2,  "#3A36CB"},
+            {1,  "#666666"},
+            {0,  "#000000"},
+
+        };
     }
 }

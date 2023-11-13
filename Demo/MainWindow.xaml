@@ -11,7 +11,8 @@
 
         
 
-        <poll2:CallCalendar/>
+        <poll2:CallCalendar
+            x:Name="calendar"/>
 
 
         <Border x:Name="border"

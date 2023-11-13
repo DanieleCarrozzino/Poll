@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Media;
 using Poll2;
 
 namespace Demo
@@ -28,6 +29,9 @@ namespace Demo
             poll.selectAnswer(list[1].Item2, 1234, true);
             poll.selectAnswer(list[2].Item2, 1234, true);
             poll.selectAnswer(list[1].Item2, 1111, true);
+
+
+            calendar.insertOrRemoveNewPartecipant(123);
         }
 
         public object ChildBorder

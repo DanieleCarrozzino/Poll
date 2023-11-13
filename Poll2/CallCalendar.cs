@@ -38,7 +38,7 @@ namespace Poll2
             CornerRadius = new CornerRadius(10);
             Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#f0fff0"));
             Padding = new Thickness(10);
-            Margin = new Thickness(4);
+            Margin = new Thickness(10);
             Effect = new DropShadowEffect
             {
                 ShadowDepth = 5,

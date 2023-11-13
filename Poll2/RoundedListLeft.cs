@@ -114,6 +114,11 @@ namespace Poll2
             return true;
         }
 
+        public int getCountOfColors()
+        {
+            return colors.Count;
+        }
+
         private async void startAnimation()
         {
             await Task.Run(async () =>

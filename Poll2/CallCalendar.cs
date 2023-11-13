@@ -14,10 +14,12 @@ using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.Reflection;
 using System.Windows.Controls.Primitives;
+using System.Collections.Specialized;
+using System.ComponentModel;
 
 namespace Poll2
 {
-    public class CallCalendar : Border
+    public class CallCalendar : Border, INotifyPropertyChanged
     {
 
         // Global objects
@@ -31,6 +33,11 @@ namespace Poll2
         /// </summary>
         public Action<bool, int> ClickAction;
 
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        public void OnPropertyChangedName(string name) =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+
         public CallCalendar()
         {
             this.personal_id = -1; // test
@@ -41,6 +48,28 @@ namespace Poll2
         {
             this.personal_id = id;
             createUI();
+        }
+
+        private string _textPartecipant = "The scheduled conference currently lacks any booked participants at this time.";
+        private string TextPartecipant
+        {
+            get
+            {
+                return _textPartecipant;
+            }
+            set
+            {
+                _textPartecipant = value;
+                OnPropertyChangedName("TextPartecipant");
+            }
+        }
+
+        public void insertOrRemoveNewPartecipant(Color color, int id)
+        {
+            bool result = roundedList.insertOrRemoveNewColor(color, personal_id);
+            if(roundedList.getCountOfColors() > 0)
+                TextPartecipant = "There are currently " + roundedList.getCountOfColors() + " participants attending the conference.";
+            else TextPartecipant = "The scheduled conference currently lacks any booked participants at this time.";
         }
 
         // Layout
@@ -207,7 +236,7 @@ namespace Poll2
             TextBlock participantsInfoTextBlock = new TextBlock
             {
                 Margin = new Thickness(5, 0, 0, 0),
-                Text = "2 participants for this conference",
+                Text = TextPartecipant,
                 TextWrapping = TextWrapping.WrapWithOverflow,
                 MaxWidth = 150,
                 VerticalAlignment = VerticalAlignment.Center,

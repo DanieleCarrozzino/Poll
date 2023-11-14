@@ -74,10 +74,11 @@ namespace Poll2
 
         public void setDateAndDuration(string dateToFormat, int duration)
         {
-            startTime       = DateTime.Parse(dateToFormat);
-            this.duration   = duration;
-
-            startTimeTextBlock.Text     = startTime.ToString("HH:mm dd-MMM-yyyy");
+            this.duration = duration;
+            if (DateTime.TryParse(dateToFormat, out startTime))
+            {
+                startTimeTextBlock.Text = startTime.ToString("HH:mm dd-MMM-yyyy");
+            }            
             durationTimeTextBlock.Text  = duration.ToString();
         }
 

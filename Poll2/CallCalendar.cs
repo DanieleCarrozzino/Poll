@@ -77,9 +77,9 @@ namespace Poll2
             this.duration = duration;
             if (DateTime.TryParse(dateToFormat, out startTime))
             {
-                startTimeTextBlock.Text = startTime.ToString("HH:mm dd-MMM-yyyy");
+                startTimeTextBlock.Text = startTime.ToString("HH:mm dd/MMM/yyyy");
             }            
-            durationTimeTextBlock.Text  = duration.ToString();
+            durationTimeTextBlock.Text  = duration.ToString() + " min";
         }
 
         // Layout
@@ -326,30 +326,38 @@ namespace Poll2
 
             mainPanel.Children.Add(descriptionBorder);
 
-            StackPanel startDurationStackPanel = new StackPanel
+
+
+            StackPanel stackHoriMain = new StackPanel
             {
                 Margin = new Thickness(7, 0, 7, 0),
                 Orientation = Orientation.Horizontal
             };
 
-            StackPanel startDurationStackPanel2 = new StackPanel
+            Grid stackVert1 = new Grid
             {
-                Margin = new Thickness(7, 0, 7, 0),
-                Orientation = Orientation.Horizontal
+                VerticalAlignment = VerticalAlignment.Stretch,
+            };
+
+            RowDefinition col1 = new RowDefinition();
+            RowDefinition col2 = new RowDefinition();
+            col1.Height = new GridLength(1, GridUnitType.Star);
+            col2.Height = new GridLength(1, GridUnitType.Star);
+            stackVert1.RowDefinitions.Add(col1);
+            stackVert1.RowDefinitions.Add(col2);
+
+            StackPanel stackVert2 = new StackPanel
+            {
+                Margin = new Thickness(0, 0, 0, 0),
+                Orientation = Orientation.Vertical,
+                VerticalAlignment = VerticalAlignment.Stretch,
             };
 
             TextBlock startTextBlock = new TextBlock
             {
                 Text = "start",
                 FontWeight = FontWeights.Normal,
-                FontSize = 12
-            };
-
-            startTimeTextBlock = new TextBlock
-            {
-                Margin = new Thickness(5, 0, 0, 0),
-                Text = "--:--",
-                FontWeight = FontWeights.Normal,
+                VerticalAlignment = VerticalAlignment.Stretch,
                 FontSize = 12
             };
 
@@ -357,24 +365,39 @@ namespace Poll2
             {
                 Text = "duration",
                 FontWeight = FontWeights.Normal,
+                VerticalAlignment = VerticalAlignment.Stretch,
                 FontSize = 12
+            };
+
+            Grid.SetRow(startTextBlock, 0);
+            stackVert1.Children.Add(startTextBlock);
+            Grid.SetRow(durationTextBlock, 1);
+            stackVert1.Children.Add(durationTextBlock);
+
+            stackHoriMain.Children.Add(stackVert1);
+
+            startTimeTextBlock = new TextBlock
+            {
+                Margin = new Thickness(5, 0, 0, 0),
+                Text = "",
+                FontWeight = FontWeights.DemiBold,
+                FontSize = 14
             };
 
             durationTimeTextBlock = new TextBlock
             {
                 Margin = new Thickness(5, 0, 0, 0),
-                Text = "--:--",
-                FontWeight = FontWeights.Normal,
-                FontSize = 12
+                Text = "",
+                FontWeight = FontWeights.DemiBold,
+                FontSize = 14
             };
 
-            startDurationStackPanel.Children.Add(startTextBlock);
-            startDurationStackPanel.Children.Add(startTimeTextBlock);
-            startDurationStackPanel2.Children.Add(durationTextBlock);
-            startDurationStackPanel2.Children.Add(durationTimeTextBlock);
+            stackVert2.Children.Add(startTimeTextBlock);
+            stackVert2.Children.Add(durationTimeTextBlock);
 
-            mainPanel.Children.Add(startDurationStackPanel);
-            mainPanel.Children.Add(startDurationStackPanel2);
+            stackHoriMain.Children.Add(stackVert2);
+
+            mainPanel.Children.Add(stackHoriMain);
         }
 
         private void createBottomButtonsUI(StackPanel mainPanel)

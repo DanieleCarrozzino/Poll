@@ -16,6 +16,7 @@ using System.Reflection;
 using System.Windows.Controls.Primitives;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Windows.Threading;
 
 namespace Poll2
 {
@@ -43,10 +44,15 @@ namespace Poll2
             createUI();
         }
 
-        public CallCalendar(int id)
+        public CallCalendar(int id, Dispatcher dispatcher)
         {
             this.personal_id = id;
-            createUI();
+
+            // Main thread
+            dispatcher.Invoke(() =>
+            {
+                createUI();
+            });
         }
 
         public void insertOrRemoveNewPartecipant(int id)

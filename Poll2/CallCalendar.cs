@@ -32,6 +32,8 @@ namespace Poll2
         private Border sendParticipationBorder;
         private TextBlock startTimeTextBlock;
         private TextBlock durationTimeTextBlock;
+        private TextBlock titleTextBlock;
+        private TextBlock descriptionTextBlock;
         private bool selected = false;
         public int calendar_id = -1;
         public int personal_id = -1;
@@ -77,9 +79,15 @@ namespace Poll2
             this.duration = duration;
             if (DateTime.TryParse(dateToFormat, out startTime))
             {
-                startTimeTextBlock.Text = startTime.ToString("HH:mm dd/MMM/yyyy");
+                startTimeTextBlock.Text = startTime.ToString("HH:mm dd/MM/yyyy");
             }            
             durationTimeTextBlock.Text  = duration.ToString() + " min";
+        }
+
+        public void setTitleAndDescription(string title, string description)
+        {
+            titleTextBlock.Text         = title;
+            descriptionTextBlock.Text   = description;
         }
 
         // Layout
@@ -160,10 +168,10 @@ namespace Poll2
         private void createInfoUI(StackPanel mainPanel)
         {
             // Title TextBlock
-            TextBlock titleTextBlock = new TextBlock
+            titleTextBlock = new TextBlock
             {
                 Margin = new Thickness(7, 0, 7, 0),
-                Text = "Title conference",
+                Text = "",
                 FontWeight = FontWeights.DemiBold,
                 VerticalAlignment = VerticalAlignment.Center,
                 FontSize = 13
@@ -172,12 +180,12 @@ namespace Poll2
             mainPanel.Children.Add(titleTextBlock);
 
             // Description TextBlock
-            TextBlock descriptionTextBlock = new TextBlock
+            descriptionTextBlock = new TextBlock
             {
                 Margin = new Thickness(7, 0, 7, 0),
                 TextWrapping = TextWrapping.WrapWithOverflow,
                 MaxWidth = 230,
-                Text = "Description of the conference, with some interesting points"
+                Text = ""
             };
 
             mainPanel.Children.Add(descriptionTextBlock);
@@ -357,7 +365,7 @@ namespace Poll2
             {
                 Text = "start",
                 FontWeight = FontWeights.Normal,
-                VerticalAlignment = VerticalAlignment.Stretch,
+                VerticalAlignment = VerticalAlignment.Center,
                 FontSize = 12
             };
 
@@ -365,7 +373,7 @@ namespace Poll2
             {
                 Text = "duration",
                 FontWeight = FontWeights.Normal,
-                VerticalAlignment = VerticalAlignment.Stretch,
+                VerticalAlignment = VerticalAlignment.Center,
                 FontSize = 12
             };
 
@@ -379,7 +387,7 @@ namespace Poll2
             startTimeTextBlock = new TextBlock
             {
                 Margin = new Thickness(5, 0, 0, 0),
-                Text = "",
+                Text = "-",
                 FontWeight = FontWeights.DemiBold,
                 FontSize = 14
             };
@@ -387,7 +395,7 @@ namespace Poll2
             durationTimeTextBlock = new TextBlock
             {
                 Margin = new Thickness(5, 0, 0, 0),
-                Text = "",
+                Text = "-",
                 FontWeight = FontWeights.DemiBold,
                 FontSize = 14
             };

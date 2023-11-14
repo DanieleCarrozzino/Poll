@@ -29,7 +29,9 @@ namespace Poll2
         private TextBlock participantsInfoTextBlock = null;
         private StackPanel stackPanelPlaceholder;
         private StackPanel participantsInfoStackPanel;
+        private Border sendParticipationBorder;
         private bool selected = false;
+        public int calendar_id = -1;
         public int personal_id = -1;
 
         /// <summary>
@@ -40,13 +42,14 @@ namespace Poll2
 
         public CallCalendar()
         {
-            this.personal_id = -1; // test
+            this.calendar_id = -1; // test
             createUI();
         }
 
-        public CallCalendar(int id, Dispatcher dispatcher)
+        public CallCalendar(int id, Dispatcher dispatcher, int personal_id)
         {
-            this.personal_id = id;
+            this.calendar_id = id;
+            this.personal_id = personal_id;
 
             // Main thread
             dispatcher.Invoke(() =>
@@ -58,6 +61,10 @@ namespace Poll2
         public void insertOrRemoveNewPartecipant(int id)
         {
             bool result = roundedList.insertOrRemoveNewColor(StaticUtility.getColorFromId(id), id);
+            if(id == personal_id && result)
+            {
+                sendParticipationBorder.Visibility = Visibility.Collapsed;
+            }
             changeLayoutAfterAddSomeone();
         }
 
@@ -396,7 +403,7 @@ namespace Poll2
             remindMeStackPanel.Children.Add(remindMeTextBlock);
 
             // Send Participation Border
-            Border sendParticipationBorder = new Border
+            sendParticipationBorder = new Border
             {
                 Padding = new Thickness(20, 8, 20, 8),
                 Margin = new Thickness(0, 5, 0, 0),
@@ -432,9 +439,12 @@ namespace Poll2
 
         private void SendParticipationBorder_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            bool result = roundedList.insertOrRemoveNewColor(StaticUtility.getColorFromId(personal_id), personal_id);
+            if (roundedList.insertOrRemoveNewColor(StaticUtility.getColorFromId(calendar_id), calendar_id))
+            {
+                sendParticipationBorder.Visibility = Visibility.Collapsed;
+                ClickAction?.Invoke(true, calendar_id);
+            }
             changeLayoutAfterAddSomeone();
-            ClickAction?.Invoke(result, personal_id);
         }
 
         private void changeLayoutAfterAddSomeone()

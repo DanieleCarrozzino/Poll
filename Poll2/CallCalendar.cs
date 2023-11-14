@@ -26,6 +26,8 @@ namespace Poll2
         private Border remindMeBorder = null;
         private RoundedListLeft roundedList = null;
         private TextBlock participantsInfoTextBlock = null;
+        private StackPanel stackPanelPlaceholder;
+        private StackPanel participantsInfoStackPanel;
         private bool selected = false;
         public int personal_id = -1;
 
@@ -50,9 +52,7 @@ namespace Poll2
         public void insertOrRemoveNewPartecipant(int id)
         {
             bool result = roundedList.insertOrRemoveNewColor(StaticUtility.getColorFromId(id), id);
-            if(roundedList.getCountOfColors() > 0)
-                participantsInfoTextBlock.Text = "There are currently " + roundedList.getCountOfColors() + " participants attending the conference.";
-            else participantsInfoTextBlock.Text = "The scheduled conference has no booked participants at the moment.";
+            changeLayoutAfterAddSomeone();
         }
 
         // Layout
@@ -200,7 +200,7 @@ namespace Poll2
             mainPanel.Children.Add(participantsBorder);
 
             // Participants Information StackPanel
-            StackPanel participantsInfoStackPanel = new StackPanel
+            participantsInfoStackPanel = new StackPanel
             {
                 Margin = new Thickness(7, 0, 7, 0),
                 Orientation = Orientation.Horizontal,
@@ -229,8 +229,37 @@ namespace Poll2
             };
 
             participantsInfoStackPanel.Children.Add(participantsInfoTextBlock);
+            participantsInfoStackPanel.Visibility = Visibility.Collapsed;
+
+            // Place holder
+            Image image = new Image
+            {
+                Width = 25,
+                Height = 25,
+                Source = new BitmapImage(new Uri("pack://application:,,,/Poll2;component/resources/images/fired.png"))
+            };
+
+            // Create TextBlock element
+            TextBlock textBlock = new TextBlock
+            {
+                Margin = new Thickness(5, 0, 0, 0),
+                Text = "No participants yet",
+                VerticalAlignment = VerticalAlignment.Center
+            };
+
+            // Create StackPanel element and add Image and TextBlock
+            stackPanelPlaceholder = new StackPanel
+            {
+                Orientation = Orientation.Horizontal,
+                Margin = new Thickness(10, 0, 0, 0),
+            };
+            stackPanelPlaceholder.Children.Add(image);
+            stackPanelPlaceholder.Children.Add(textBlock);
+            stackPanelPlaceholder.Visibility = Visibility.Visible;
+
 
             mainPanel.Children.Add(participantsInfoStackPanel);
+            mainPanel.Children.Add(stackPanelPlaceholder);
         }
 
         private void createTimeUI(StackPanel mainPanel)
@@ -276,6 +305,12 @@ namespace Poll2
                 Orientation = Orientation.Horizontal
             };
 
+            StackPanel startDurationStackPanel2 = new StackPanel
+            {
+                Margin = new Thickness(7, 0, 7, 0),
+                Orientation = Orientation.Horizontal
+            };
+
             TextBlock startTextBlock = new TextBlock
             {
                 Text = "start",
@@ -293,7 +328,6 @@ namespace Poll2
 
             TextBlock durationTextBlock = new TextBlock
             {
-                Margin = new Thickness(10, 0, 0, 0),
                 Text = "duration",
                 FontWeight = FontWeights.Normal,
                 FontSize = 12
@@ -309,10 +343,11 @@ namespace Poll2
 
             startDurationStackPanel.Children.Add(startTextBlock);
             startDurationStackPanel.Children.Add(startTimeTextBlock);
-            startDurationStackPanel.Children.Add(durationTextBlock);
-            startDurationStackPanel.Children.Add(durationTimeTextBlock);
+            startDurationStackPanel2.Children.Add(durationTextBlock);
+            startDurationStackPanel2.Children.Add(durationTimeTextBlock);
 
             mainPanel.Children.Add(startDurationStackPanel);
+            mainPanel.Children.Add(startDurationStackPanel2);
         }
 
         private void createBottomButtonsUI(StackPanel mainPanel)
@@ -392,10 +427,23 @@ namespace Poll2
         private void SendParticipationBorder_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             bool result = roundedList.insertOrRemoveNewColor(StaticUtility.getColorFromId(personal_id), personal_id);
-            if (roundedList.getCountOfColors() > 0)
-                participantsInfoTextBlock.Text = "There are currently " + roundedList.getCountOfColors() + " participants attending the conference.";
-            else participantsInfoTextBlock.Text = "The scheduled conference has no booked participants at the moment.";
+            changeLayoutAfterAddSomeone();
             ClickAction?.Invoke(result, personal_id);
+        }
+
+        private void changeLayoutAfterAddSomeone()
+        {
+            if (roundedList.getCountOfColors() > 0)
+            {
+                stackPanelPlaceholder.Visibility = Visibility.Collapsed;
+                participantsInfoStackPanel.Visibility = Visibility.Visible;
+                participantsInfoTextBlock.Text = "There are currently " + roundedList.getCountOfColors() + " participants attending the conference.";
+            }
+            else
+            {
+                stackPanelPlaceholder.Visibility = Visibility.Visible;
+                participantsInfoStackPanel.Visibility = Visibility.Collapsed;
+            }
         }
 
         // Event

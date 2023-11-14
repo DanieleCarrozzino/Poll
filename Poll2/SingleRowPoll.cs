@@ -18,9 +18,10 @@ namespace Poll2
         public event Action<string, int, bool> ClickAction;
 
         // Graphic Object
-        RoundedList         round       = new RoundedList(new List<(Color, int)>());
-        LinearProgressBar   progress    = new LinearProgressBar();
-        Border              border      = new Border();
+        private RoundedList round               = new RoundedList(new List<(Color, int)>());
+        private LinearProgressBar progress      = new LinearProgressBar();
+        private Border border                   = new Border();
+        private TextBlock textNum               = new TextBlock();
 
         // Data
         private string text;
@@ -39,6 +40,7 @@ namespace Poll2
 
             Orientation         = Orientation.Vertical;
             HorizontalAlignment = HorizontalAlignment.Center;
+            Width               = 280;
 
             //************
             // First row of items
@@ -47,12 +49,15 @@ namespace Poll2
             ColumnDefinition col1 = new ColumnDefinition();
             ColumnDefinition col2 = new ColumnDefinition();
             ColumnDefinition col3 = new ColumnDefinition();
+            ColumnDefinition col4 = new ColumnDefinition();
             col1.Width = GridLength.Auto;
             col2.Width = new GridLength(1, GridUnitType.Star);
             col3.Width = GridLength.Auto;
+            col4.Width = GridLength.Auto;
             grid.ColumnDefinitions.Add(col1);
             grid.ColumnDefinitions.Add(col2);
             grid.ColumnDefinitions.Add(col3);
+            grid.ColumnDefinitions.Add(col4);
 
             border.Width    = 18;
             border.Height   = 18;
@@ -76,7 +81,7 @@ namespace Poll2
             textBlock.TextWrapping              = TextWrapping.Wrap;
             textBlock.Margin                    = new Thickness(0, 3, 0, 6);
             textBlock.MouseLeftButtonUp += Border_MouseLeftButtonUp;
-            textBlock.MaxWidth = 180;
+            textBlock.MaxWidth = 220;
             Grid.SetColumn(textBlock, 1);
             grid.Children.Add(textBlock);
 
@@ -84,6 +89,15 @@ namespace Poll2
             round.HorizontalAlignment = HorizontalAlignment.Right;
             Grid.SetColumn(round, 2);
             grid.Children.Add(round);
+
+            // Num of circles
+            textNum.Text = "0";
+            textNum.FontWeight = FontWeights.DemiBold;
+            textNum.VerticalAlignment = VerticalAlignment.Center;
+            textNum.HorizontalAlignment = HorizontalAlignment.Center;
+            textNum.Margin = new Thickness(2, 0, 2, 0);
+            Grid.SetColumn(textNum, 3);
+            grid.Children.Add(textNum);
 
             //************
             // Second row of items
@@ -126,13 +140,14 @@ namespace Poll2
             if (select)
             {
                 num_selection++;
-                round.insertNewColor(Utility.GetRandomColor(), id);
+                round.insertNewColor(StaticUtility.getColorFromId(id), id);
             }
             else
             {
                 num_selection--;
                 round.removeColor(id);
             }
+            textNum.Text = num_selection.ToString();
         }
 
         public void setProgressValue(int value)

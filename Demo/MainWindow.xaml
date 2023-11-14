@@ -9,7 +9,6 @@
 
     <StackPanel Orientation="Vertical">
 
-        
 
         <poll2:CallCalendar
             x:Name="calendar"/>

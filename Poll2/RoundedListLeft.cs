@@ -53,7 +53,15 @@ namespace Poll2
 
                 brush.Freeze();
                 pen.Freeze();
+
+                // Circle
                 dc.DrawEllipse(brush, pen, new Point(Math.Min(startX, MAX_CIRCLES), 19), radius[index].Item1, radius[index].Item2);
+
+                // Initials
+                dc.DrawText(getTextFormat("DC", Math.Max(radius[index].Item1, 1)), 
+                    new Point(Math.Min(startX, MAX_CIRCLES) - (7 + ((MAX_RADIUS - radius[index].Item1) / 2.2)) + (MAX_RADIUS - radius[index].Item1), 
+                    14 + ((MAX_RADIUS - radius[index].Item1) / 2)));
+
                 radius[index] = (
                     Math.Min(MAX_RADIUS, getDeltaFromRadius(radius[index].Item1)),
                     Math.Min(MAX_RADIUS, getDeltaFromRadius(radius[index].Item2)));
@@ -61,6 +69,27 @@ namespace Poll2
                 index++;
             }
 
+        }
+
+        private FormattedText getTextFormat(string initials, double fontSize)
+        {
+            // Create a text format
+            Typeface typeface = new Typeface("Arial");
+            string textToDraw = "DC";
+
+            // Create the formatted text object
+            FormattedText formattedText = new FormattedText(
+                textToDraw,
+                System.Globalization.CultureInfo.CurrentCulture,
+                FlowDirection.LeftToRight,
+                typeface,
+                fontSize,
+                Brushes.White,
+                new NumberSubstitution(),
+                1);
+            formattedText.SetFontWeight(FontWeights.DemiBold);
+
+            return formattedText;
         }
 
         public void removeColor(int id)

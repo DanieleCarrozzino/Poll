@@ -31,7 +31,7 @@ namespace Demo
             poll.selectAnswer(list[1].Item2, 1111, true);
 
 
-            calendar.insertOrRemoveNewPartecipant(123);
+            //calendar.insertOrRemoveNewPartecipant(123);
         }
 
         public object ChildBorder

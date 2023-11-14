@@ -10,6 +10,7 @@
     <None Remove="resources\images\calendar_call.png" />
     <None Remove="resources\images\calendar_clock.png" />
     <None Remove="resources\images\checked.png" />
+    <None Remove="resources\images\fired.png" />
     <None Remove="resources\images\multiple_selection.png" />
     <None Remove="resources\images\poll.png" />
   </ItemGroup>
@@ -22,6 +23,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="resources\images\checked.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\images\fired.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="resources\images\multiple_selection.png">

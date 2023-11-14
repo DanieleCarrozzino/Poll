@@ -30,9 +30,13 @@ namespace Poll2
         private StackPanel stackPanelPlaceholder;
         private StackPanel participantsInfoStackPanel;
         private Border sendParticipationBorder;
+        private TextBlock startTimeTextBlock;
+        private TextBlock durationTimeTextBlock;
         private bool selected = false;
         public int calendar_id = -1;
         public int personal_id = -1;
+        public DateTime startTime;
+        public int duration = 0; // duration in minutes
 
         /// <summary>
         /// Click action callback
@@ -66,6 +70,15 @@ namespace Poll2
                 sendParticipationBorder.Visibility = Visibility.Collapsed;
             }
             changeLayoutAfterAddSomeone();
+        }
+
+        public void setDateAndDuration(string dateToFormat, int duration)
+        {
+            startTime       = DateTime.Parse(dateToFormat);
+            this.duration   = duration;
+
+            startTimeTextBlock.Text     = startTime.ToString("HH:mm dd-MMM-yyyy");
+            durationTimeTextBlock.Text  = duration.ToString();
         }
 
         // Layout
@@ -331,7 +344,7 @@ namespace Poll2
                 FontSize = 12
             };
 
-            TextBlock startTimeTextBlock = new TextBlock
+            startTimeTextBlock = new TextBlock
             {
                 Margin = new Thickness(5, 0, 0, 0),
                 Text = "--:--",
@@ -346,7 +359,7 @@ namespace Poll2
                 FontSize = 12
             };
 
-            TextBlock durationTimeTextBlock = new TextBlock
+            durationTimeTextBlock = new TextBlock
             {
                 Margin = new Thickness(5, 0, 0, 0),
                 Text = "--:--",

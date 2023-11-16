@@ -40,7 +40,7 @@ namespace Poll2
 
             Orientation         = Orientation.Vertical;
             HorizontalAlignment = HorizontalAlignment.Center;
-            Width               = 280;
+            Width               = 285;
 
             //************
             // First row of items

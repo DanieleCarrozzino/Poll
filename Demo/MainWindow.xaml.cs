@@ -19,11 +19,19 @@ namespace Demo
                     ("Be me", 4),
                 };
         private Poll poll;
+        private News news;
 
         public MainWindow()
         {
             DataContext = this;
             poll        = new Poll(list, "Do you need somthing to create something else?", 1);
+            news = new("Big news", "Titolo delle news", "Descrizione piccolina per la big news", new List<string>()
+            {
+                "Primo punto",
+                "Secondo punot un po più descrittivo",
+                "E infinde l'ultimo puntoi che andrà a definire molte più cose se voglio aggiungere altro per sentire e vedere se possa starci qualcosa di più"
+            });
+
             InitializeComponent();
 
             poll.selectAnswer(list[1].Item2, 1234, true);
@@ -38,7 +46,7 @@ namespace Demo
         {
             get
             {
-                return poll;
+                return news;
             }
         }
     }

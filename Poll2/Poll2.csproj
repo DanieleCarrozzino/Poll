@@ -13,6 +13,7 @@
     <None Remove="resources\images\fired.png" />
     <None Remove="resources\images\multiple_selection.png" />
     <None Remove="resources\images\poll.png" />
+    <None Remove="resources\images\postman.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,6 +33,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="resources\images\poll.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\images\postman.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
 	<Resource Include="resources\images\team.png">

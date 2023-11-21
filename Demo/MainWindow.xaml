@@ -14,21 +14,11 @@
             x:Name="calendar"/>
 
 
-        <Border x:Name="border"
-                CornerRadius="10"
-                Background="AliceBlue"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Padding="4"
-                Margin="10">
+        <Grid>
 
             <ContentControl Content="{Binding ChildBorder}"/>
 
-            <Border.Effect>
-                <DropShadowEffect ShadowDepth="5" BlurRadius="5" Opacity="0.3" Color="Gray"/>
-            </Border.Effect>
-
-        </Border>
+        </Grid>
 
     </StackPanel>
 </Window>

@@ -9,11 +9,25 @@
   <ItemGroup>
     <None Remove="resources\images\calendar_call.png" />
     <None Remove="resources\images\calendar_clock.png" />
+    <None Remove="resources\images\cats\happy_red_cat_dad.png" />
+    <None Remove="resources\images\cats\red_cat_astronaut.png" />
+    <None Remove="resources\images\cats\red_cat_it.png" />
+    <None Remove="resources\images\cats\red_cat_megaphone.png" />
+    <None Remove="resources\images\cats\red_cat_selling_journal.png" />
+    <None Remove="resources\images\cats\red_cat_tv.png" />
+    <None Remove="resources\images\cats\red_cat_tv_2.png" />
     <None Remove="resources\images\checked.png" />
     <None Remove="resources\images\fired.png" />
+    <None Remove="resources\images\illustrations\creation.png" />
     <None Remove="resources\images\multiple_selection.png" />
     <None Remove="resources\images\poll.png" />
     <None Remove="resources\images\postman.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="resources\images\illustrations\creation.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
@@ -21,6 +35,27 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="resources\images\calendar_clock.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\images\cats\happy_red_cat_dad.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\images\cats\red_cat_astronaut.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\images\cats\red_cat_it.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\images\cats\red_cat_megaphone.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\images\cats\red_cat_selling_journal.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\images\cats\red_cat_tv.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\images\cats\red_cat_tv_2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="resources\images\checked.png">

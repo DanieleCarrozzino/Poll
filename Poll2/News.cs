@@ -34,9 +34,6 @@ namespace Poll2
         {
             HorizontalAlignment = HorizontalAlignment.Center;
             VerticalAlignment = VerticalAlignment.Center;
-            CornerRadius = new CornerRadius(20);
-            Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#f0fff0"));
-            Padding = new Thickness(0);
             Margin = new Thickness(20);
             
             Effect = new DropShadowEffect
@@ -57,7 +54,7 @@ namespace Poll2
             // Postman image
             BitmapImage bitmap = new BitmapImage();
             bitmap.BeginInit();
-            bitmap.UriSource = new Uri(imagePath == null ? @"pack://application:,,,/Poll2;component/resources/images/postman.png" : imagePath);
+            bitmap.UriSource = new Uri(imagePath == null ? @"pack://application:,,,/Poll2;component/resources/images/cats/red_cat_tv.png" : imagePath);
             bitmap.EndInit();
 
             ImageBrush image = new ImageBrush
@@ -71,20 +68,29 @@ namespace Poll2
                 CornerRadius    = new CornerRadius(20, 0, 0, 20),
                 Background      = image,
                 Width           = 140,
-                Margin          = new Thickness(0, 0, 15, 0),
+                Margin          = new Thickness(0, 0, 0, 0),
                 VerticalAlignment = VerticalAlignment.Stretch,
                 HorizontalAlignment = HorizontalAlignment.Left,
             };
 
             backPanel.Children.Add(border);
 
+            Border leftBorder = new Border
+            {
+                Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#f0fff0")),
+                CornerRadius = new CornerRadius(20),
+                Padding = new Thickness(10),
+                Margin = new Thickness(-20, 0, 0, 0),
+                MaxWidth = 260,
+                MinHeight = 150,
+            };
+
             StackPanel mainStackPanel = new StackPanel
             {
                 Orientation = Orientation.Vertical,
                 HorizontalAlignment= HorizontalAlignment.Left,
                 VerticalAlignment = VerticalAlignment.Center,
-                MaxWidth = 200,
-                Margin = new Thickness(12),
+                Margin = new Thickness(2),
             };
 
             // TITLE
@@ -165,7 +171,8 @@ namespace Poll2
                 mainStackPanel.Children.Add(grid);
             }
 
-            backPanel.Children.Add(mainStackPanel);
+            leftBorder.Child = mainStackPanel;
+            backPanel.Children.Add(leftBorder);
             this.Child = backPanel;
         }
 

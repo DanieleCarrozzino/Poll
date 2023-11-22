@@ -28,8 +28,6 @@ namespace Demo
             news = new("Big news", "Titolo delle news", "Descrizione piccolina per la big news", new List<string>()
             {
                 "Primo punto",
-                "Secondo punot un po più descrittivo",
-                "E infinde l'ultimo puntoi che andrà a definire molte più cose se voglio aggiungere altro per sentire e vedere se possa starci qualcosa di più"
             });
 
             InitializeComponent();

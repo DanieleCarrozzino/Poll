@@ -219,9 +219,9 @@ namespace Poll2
 
             linear = new LinearProgressBar(180, 38, Utility.Blue);
 
-            button.Child = downloadText;
             containerButton.Children.Add(linear);
             containerButton.Children.Add(button);
+            containerButton.Children.Add(downloadText);
             mainStackPanel.Children.Add(containerButton);
 
             leftBorder.Child = mainStackPanel;
@@ -234,7 +234,7 @@ namespace Poll2
             if (!is_downloading)
             {
                 is_downloading = true;
-                button.Opacity = 0.3;
+                button.Opacity = 0;
                 downloadText.Text = "Downloading...";
                 ButtonClicked?.Invoke("");
             }            

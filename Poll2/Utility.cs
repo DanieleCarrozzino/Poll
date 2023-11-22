@@ -17,5 +17,7 @@ namespace Poll2
             random.NextBytes(rgb);
             return Color.FromRgb(rgb[0], rgb[1], rgb[2]);
         }
+
+        public static Color Blue = Color.FromRgb(26, 140, 255);
     }
 }

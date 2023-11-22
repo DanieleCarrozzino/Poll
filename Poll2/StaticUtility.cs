@@ -230,13 +230,13 @@ namespace Poll2
         private static void ElevationAnimation(Border border, bool up, bool selected)
         {
             DoubleAnimation anim = new DoubleAnimation();
-            anim.From = up ? 0 : (selected ? 4 : 3);
-            anim.To = up ? (selected ? 4 : 3) : 0;
+            anim.From = up ? 0 : (selected ? 5 : 5);
+            anim.To = up ? (selected ? 5 : 5) : 0;
             anim.Duration = TimeSpan.FromSeconds(0.2);
 
             DoubleAnimation animOpacity = new DoubleAnimation();
-            animOpacity.From = up ? 0.1 : (selected ? 0.4 : 0.4);
-            animOpacity.To = up ? (selected ? 0.4 : 0.4) : 0.1;
+            animOpacity.From = up ? 0.1 : (selected ? 0.5 : 0.5);
+            animOpacity.To = up ? (selected ? 0.5 : 0.5) : 0.1;
             animOpacity.Duration = TimeSpan.FromSeconds(0.2);
 
             Storyboard sb = new Storyboard();

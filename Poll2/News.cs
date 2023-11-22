@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Media.Effects;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Poll2
 {
@@ -18,6 +19,8 @@ namespace Poll2
         private string description  = "";
         private string imagePath    = "";
         private List<string> list_description_points;
+
+        public Action<string> ButtonClicked;
 
         public News(string title, string subtitle, string description, List<string> list_description_points, string imagePath = null)
         {
@@ -77,7 +80,7 @@ namespace Poll2
 
             Border leftBorder = new Border
             {
-                Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#f0fff0")),
+                Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#fafaff")),
                 CornerRadius = new CornerRadius(20),
                 Padding = new Thickness(10),
                 Margin = new Thickness(-20, 0, 0, 0),
@@ -171,10 +174,48 @@ namespace Poll2
                 mainStackPanel.Children.Add(grid);
             }
 
+            Border button = new Border
+            {
+                Background = new SolidColorBrush(Utility.Blue),
+                CornerRadius = new CornerRadius(17),
+                VerticalAlignment= VerticalAlignment.Center,
+                HorizontalAlignment= HorizontalAlignment.Center,
+                Padding = new Thickness(20, 10, 20, 10),
+                Margin = new Thickness(0, 20, 0, 0),
+                Effect = new DropShadowEffect
+                {
+                    ShadowDepth     = 5,
+                    BlurRadius      = 5,
+                    Opacity         = 0.5,
+                    Color           = Colors.Gray,
+                },
+            };
+
+            button.MouseLeftButtonUp += Button_MouseLeftButtonUp;
+
+            TextBlock downloadText = new TextBlock
+            {
+                Margin = new Thickness(0, 0, 0, 0),
+                Text = "Download and install",
+                FontWeight = FontWeights.DemiBold,
+                Foreground = new SolidColorBrush(Colors.White),
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Left,
+                FontSize = 13,
+                TextWrapping = TextWrapping.Wrap,
+            };
+
+            button.Child = downloadText;
+            mainStackPanel.Children.Add(button);
+
             leftBorder.Child = mainStackPanel;
             backPanel.Children.Add(leftBorder);
             this.Child = backPanel;
         }
 
+        private void Button_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            ButtonClicked?.Invoke("");
+        }
     }
 }

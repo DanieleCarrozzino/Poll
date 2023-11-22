@@ -13,7 +13,7 @@ namespace Poll2
     {
         private const int   MAX_WIDTH = 260;
         private const int   HEIGHT    = 12;
-        private const float UNITY     = (float)MAX_WIDTH / (float)100;
+        private float UNITY = (float)MAX_WIDTH / (float)100;
 
         private double value = 0;
         private double value_to_reach = 0;
@@ -38,6 +38,7 @@ namespace Poll2
             this.Height = height;
             this.Width  = width;
             cornerRadius = height / 2;
+            UNITY = (float)width / (float)100;
 
             colorBack   = Brushes.LightGray;
             color       = new SolidColorBrush(_color);

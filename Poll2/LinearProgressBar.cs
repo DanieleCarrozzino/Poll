@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,17 +12,33 @@ namespace Poll2
     internal class LinearProgressBar : FrameworkElement
     {
         private const int   MAX_WIDTH = 260;
+        private const int   HEIGHT    = 12;
         private const float UNITY     = (float)MAX_WIDTH / (float)100;
 
         private double value = 0;
         private double value_to_reach = 0;
         private bool animationRunning = false;
+        private Brush colorBack;
+        private Brush color;
 
         public LinearProgressBar()
         {
             this.Margin = new Thickness(24, 0, 0, 0);
-            this.Height = 12;
+            this.Height = HEIGHT;
             this.Width  = MAX_WIDTH;
+
+            colorBack   = Brushes.LightGray;
+            color       = Brushes.Green;
+        }
+
+        public LinearProgressBar(int width, int height, System.Windows.Media.Color _color)
+        {
+            this.Margin = new Thickness(0, 0, 0, 0);
+            this.Height = Height;
+            this.Width  = Width;
+
+            colorBack   = Brushes.LightGray;
+            color       = new SolidColorBrush(_color);
         }
 
         protected override void OnRender(DrawingContext dc)
@@ -29,11 +46,11 @@ namespace Poll2
             // Gray rectangle on the background
             Rect rect = new Rect(0, 0, MAX_WIDTH, 10);
             double cornerRadius = 5;
-            dc.DrawRoundedRectangle(Brushes.LightGray, new Pen(), rect, cornerRadius, cornerRadius);
+            dc.DrawRoundedRectangle(colorBack, new Pen(), rect, cornerRadius, cornerRadius);
 
             // Main rectangle
-            rect = new Rect(0, -1, Math.Max(value * UNITY, 0), 12);
-            dc.DrawRoundedRectangle(Brushes.Green, new Pen(), rect, cornerRadius, cornerRadius);
+            rect = new Rect(0, -1, Math.Max(value * UNITY, 0), Height);
+            dc.DrawRoundedRectangle(color, new Pen(), rect, cornerRadius, cornerRadius);
         }
 
         public void setValue(int value)

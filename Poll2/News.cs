@@ -21,6 +21,10 @@ namespace Poll2
         private List<string> list_description_points;
 
         public Action<string> ButtonClicked;
+        private LinearProgressBar linear;
+        private TextBlock downloadText;
+        private Border button;
+        private bool is_downloading = false;
 
         public News(string title, string subtitle, string description, List<string> list_description_points, string imagePath = null)
         {
@@ -174,14 +178,16 @@ namespace Poll2
                 mainStackPanel.Children.Add(grid);
             }
 
-            Border button = new Border
+            button = new Border
             {
                 Background = new SolidColorBrush(Utility.Blue),
                 CornerRadius = new CornerRadius(17),
                 VerticalAlignment= VerticalAlignment.Center,
                 HorizontalAlignment= HorizontalAlignment.Center,
-                Padding = new Thickness(20, 10, 20, 10),
+                Padding = new Thickness(10, 0, 10, 0),
                 Margin = new Thickness(0, 20, 0, 0),
+                Width = 180,
+                Height = 38,
                 Effect = new DropShadowEffect
                 {
                     ShadowDepth     = 5,
@@ -193,17 +199,19 @@ namespace Poll2
 
             button.MouseLeftButtonUp += Button_MouseLeftButtonUp;
 
-            TextBlock downloadText = new TextBlock
+            downloadText = new TextBlock
             {
                 Margin = new Thickness(0, 0, 0, 0),
                 Text = "Download and install",
                 FontWeight = FontWeights.DemiBold,
                 Foreground = new SolidColorBrush(Colors.White),
                 VerticalAlignment = VerticalAlignment.Center,
-                HorizontalAlignment = HorizontalAlignment.Left,
+                HorizontalAlignment = HorizontalAlignment.Center,
                 FontSize = 13,
                 TextWrapping = TextWrapping.Wrap,
             };
+
+            linear = new LinearProgressBar(180, 38, Utility.Blue);
 
             button.Child = downloadText;
             mainStackPanel.Children.Add(button);
@@ -215,7 +223,24 @@ namespace Poll2
 
         private void Button_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            ButtonClicked?.Invoke("");
+            if (!is_downloading)
+            {
+                is_downloading = true;
+                button.Opacity = 0.3;
+                downloadText.Text = "Downloading...";
+                ButtonClicked?.Invoke("");
+            }            
+        }
+
+        public void update_progress(int value)
+        {
+            linear.setValue(value);
+            if(value == 100)
+            {
+                is_downloading      = false;
+                button.Opacity      = 1;
+                downloadText.Text   = "Installing...";
+            }
         }
     }
 }

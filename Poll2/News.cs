@@ -217,6 +217,8 @@ namespace Poll2
                 TextWrapping = TextWrapping.Wrap,
             };
 
+            downloadText.MouseLeftButtonUp += Button_MouseLeftButtonUp;
+
             linear = new LinearProgressBar(180, 38, Utility.Blue);
 
             containerButton.Children.Add(linear);

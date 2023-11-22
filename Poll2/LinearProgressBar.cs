@@ -34,8 +34,8 @@ namespace Poll2
         public LinearProgressBar(int width, int height, System.Windows.Media.Color _color)
         {
             this.Margin = new Thickness(0, 0, 0, 0);
-            this.Height = Height;
-            this.Width  = Width;
+            this.Height = height;
+            this.Width  = width;
 
             colorBack   = Brushes.LightGray;
             color       = new SolidColorBrush(_color);

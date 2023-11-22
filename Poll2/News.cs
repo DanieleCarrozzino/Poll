@@ -178,14 +178,20 @@ namespace Poll2
                 mainStackPanel.Children.Add(grid);
             }
 
+            Grid containerButton = new Grid
+            {
+                Margin = new Thickness(0, 20, 0, 0),
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Center,
+            };
+
             button = new Border
             {
                 Background = new SolidColorBrush(Utility.Blue),
                 CornerRadius = new CornerRadius(17),
                 VerticalAlignment= VerticalAlignment.Center,
                 HorizontalAlignment= HorizontalAlignment.Center,
-                Padding = new Thickness(10, 0, 10, 0),
-                Margin = new Thickness(0, 20, 0, 0),
+                Padding = new Thickness(0, 0, 0, 0),
                 Width = 180,
                 Height = 38,
                 Effect = new DropShadowEffect
@@ -214,7 +220,9 @@ namespace Poll2
             linear = new LinearProgressBar(180, 38, Utility.Blue);
 
             button.Child = downloadText;
-            mainStackPanel.Children.Add(button);
+            containerButton.Children.Add(linear);
+            containerButton.Children.Add(button);
+            mainStackPanel.Children.Add(containerButton);
 
             leftBorder.Child = mainStackPanel;
             backPanel.Children.Add(leftBorder);

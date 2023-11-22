@@ -18,6 +18,7 @@ namespace Poll2
         private double value = 0;
         private double value_to_reach = 0;
         private bool animationRunning = false;
+        private double cornerRadius = 5;
         private Brush colorBack;
         private Brush color;
 
@@ -33,9 +34,10 @@ namespace Poll2
 
         public LinearProgressBar(int width, int height, System.Windows.Media.Color _color)
         {
-            this.Margin = new Thickness(0, 0, 0, 0);
+            this.Margin = new Thickness(0, 1, 0, 0);
             this.Height = height;
             this.Width  = width;
+            cornerRadius = height / 2;
 
             colorBack   = Brushes.LightGray;
             color       = new SolidColorBrush(_color);
@@ -44,8 +46,7 @@ namespace Poll2
         protected override void OnRender(DrawingContext dc)
         {
             // Gray rectangle on the background
-            Rect rect = new Rect(0, 0, MAX_WIDTH, 10);
-            double cornerRadius = 5;
+            Rect rect = new Rect(0, 0, Width, Height - 2);
             dc.DrawRoundedRectangle(colorBack, new Pen(), rect, cornerRadius, cornerRadius);
 
             // Main rectangle

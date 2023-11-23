@@ -20,7 +20,7 @@ namespace Poll2
         private string imagePath    = "";
         private List<string> list_description_points;
 
-        public Action<string> ButtonClicked;
+        public Action<string> ButtonClicked = null;
         private LinearProgressBar linear;
         private TextBlock downloadText;
         private Border button;
@@ -250,7 +250,7 @@ namespace Poll2
 
         private void Button_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            if (!is_downloading)
+            if (!is_downloading && ButtonClicked != null)
             {
                 is_downloading = true;
                 button.Opacity = 0;

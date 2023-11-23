@@ -242,6 +242,11 @@ namespace Poll2
             }            
         }
 
+        public void setButtonText(string text)
+        {
+            downloadText.Text = text;
+        }
+
         public void update_progress(int value)
         {
             linear.setValue(value);

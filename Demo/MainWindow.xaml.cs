@@ -38,8 +38,6 @@ namespace Demo
 
 
             //calendar.insertOrRemoveNewPartecipant(123);
-
-            news.setButtonText("text");
         }
 
         public object ChildBorder

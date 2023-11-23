@@ -272,5 +272,24 @@ namespace Poll2
             {0,  "#000000"},
 
         };
+
+        public static readonly Random random = new Random();
+        public static string getRandomNameCat()
+        {
+            int index = random.Next(0, CatDictionary.Count - 1);
+            return CatDictionary[index];
+        }
+
+        private static Dictionary<int, string> CatDictionary = new Dictionary<int, string>() {
+
+            {0,  "cat_speaking.png"},
+            {1,  "red_cat_astronaut.png"},
+            {2,  "red_cat_it.png"},
+            {3,  "red_cat_megaphone.png"},
+            {4,  "red_cat_selling_journal.png"},
+            {5,  "red_cat_tv.png"},
+            {6,  "red_cat_tv2.png"},
+
+        };
     }
 }

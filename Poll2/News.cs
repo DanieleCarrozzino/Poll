@@ -63,7 +63,7 @@ namespace Poll2
             // Postman image
             BitmapImage bitmap = new BitmapImage();
             bitmap.BeginInit();
-            bitmap.UriSource = new Uri(imagePath == null ? @"pack://application:,,,/Poll2;component/resources/images/cats/red_cat_tv.png" : imagePath);
+            bitmap.UriSource = new Uri(imagePath == null ? @"pack://application:,,,/Poll2;component/resources/images/cats/" + StaticUtility.getRandomNameCat() : imagePath);
             bitmap.EndInit();
 
             image = new ImageBrush
@@ -262,7 +262,7 @@ namespace Poll2
         public void setButtonText(string text)
         {
             downloadText.Text = text;
-            setImage(@"pack://application:,,,/Poll2;component/resources/images/cats/cat_on_a_sofa.png");
+            setImage(@"pack://application:,,,/Poll2;component/resources/images/cats/happy_red_cat_dad.png");
         }
 
         public void update_progress(int value)

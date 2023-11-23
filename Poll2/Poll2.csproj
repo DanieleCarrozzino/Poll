@@ -9,6 +9,7 @@
   <ItemGroup>
     <None Remove="resources\images\calendar_call.png" />
     <None Remove="resources\images\calendar_clock.png" />
+    <None Remove="resources\images\cats\cat_on_a_sofa.png" />
     <None Remove="resources\images\cats\cat_speaking.png" />
     <None Remove="resources\images\cats\happy_red_cat_dad.png" />
     <None Remove="resources\images\cats\red_cat_astronaut.png" />
@@ -26,6 +27,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="resources\images\cats\cat_on_a_sofa.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="resources\images\cats\cat_speaking.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>

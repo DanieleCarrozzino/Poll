@@ -24,6 +24,7 @@ namespace Poll2
         private LinearProgressBar linear;
         private TextBlock downloadText;
         private Border button;
+        private ImageBrush image;
         private bool is_downloading = false;
 
         public News(string title, string subtitle, string description, List<string> list_description_points, string imagePath = null)
@@ -64,7 +65,7 @@ namespace Poll2
             bitmap.UriSource = new Uri(imagePath == null ? @"pack://application:,,,/Poll2;component/resources/images/cats/red_cat_tv.png" : imagePath);
             bitmap.EndInit();
 
-            ImageBrush image = new ImageBrush
+            image = new ImageBrush
             {
                 Stretch     = Stretch.UniformToFill,
                 ImageSource = bitmap,
@@ -231,6 +232,20 @@ namespace Poll2
             this.Child = backPanel;
         }
 
+        private void setImage(string path)
+        {
+            BitmapImage bitmap = new BitmapImage();
+            bitmap.BeginInit();
+            bitmap.UriSource = new Uri(path);
+            bitmap.EndInit();
+
+            image = new ImageBrush
+            {
+                Stretch = Stretch.UniformToFill,
+                ImageSource = bitmap,
+            };
+        }
+
         private void Button_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             if (!is_downloading)
@@ -245,6 +260,7 @@ namespace Poll2
         public void setButtonText(string text)
         {
             downloadText.Text = text;
+            setImage(@"pack://application:,,,/Poll2;component/resources/images/cats/cat_on_a_sofa.png");
         }
 
         public void update_progress(int value)

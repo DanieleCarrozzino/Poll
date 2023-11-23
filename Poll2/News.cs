@@ -25,6 +25,7 @@ namespace Poll2
         private TextBlock downloadText;
         private Border button;
         private ImageBrush image;
+        private Border borderImage;
         private bool is_downloading = false;
 
         public News(string title, string subtitle, string description, List<string> list_description_points, string imagePath = null)
@@ -71,7 +72,7 @@ namespace Poll2
                 ImageSource = bitmap,
             };
 
-            Border border = new Border
+            borderImage = new Border
             {
                 CornerRadius    = new CornerRadius(20, 0, 0, 20),
                 Background      = image,
@@ -81,7 +82,7 @@ namespace Poll2
                 HorizontalAlignment = HorizontalAlignment.Left,
             };
 
-            backPanel.Children.Add(border);
+            backPanel.Children.Add(borderImage);
 
             Border leftBorder = new Border
             {
@@ -244,6 +245,7 @@ namespace Poll2
                 Stretch = Stretch.UniformToFill,
                 ImageSource = bitmap,
             };
+            borderImage.Background = image;
         }
 
         private void Button_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)

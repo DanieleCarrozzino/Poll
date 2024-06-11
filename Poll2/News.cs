@@ -165,7 +165,7 @@ namespace Poll2
                 TextBlock point = new TextBlock
                 {
                     Margin = new Thickness(14, 0, 0, 0),
-                    Text = text,
+                    Text = text.Trim(),
                     FontWeight = FontWeights.Regular,
                     VerticalAlignment = VerticalAlignment.Center,
                     HorizontalAlignment = HorizontalAlignment.Left,

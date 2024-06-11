@@ -156,7 +156,7 @@ namespace Poll2
                     Height = 5,
                     Margin = new Thickness(0, 6, 0, 0), 
                     CornerRadius = new CornerRadius(3),
-                    VerticalAlignment = VerticalAlignment.Top,
+                    VerticalAlignment = VerticalAlignment.Center,
                     HorizontalAlignment = HorizontalAlignment.Left,
                     Background = new SolidColorBrush(Colors.Black),
                 };

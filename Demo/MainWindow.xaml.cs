@@ -27,7 +27,7 @@ namespace Demo
             poll        = new Poll(list, "Do you need somthing to create something else?", 1);
             news = new("Big news", "Titolo delle news", "Descrizione piccolina per la big news", new List<string>()
             {
-                "Primo punto",
+                "Primo punto", "Secondo punto",
             });
 
             InitializeComponent();
